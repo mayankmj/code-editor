@@ -1,30 +1,54 @@
 
 import {Box,styled} from '@mui/material'
+import { useState } from 'react';
 import CloseFullscreen from '@mui/icons-material/CloseFullscreen'
 import React, { Component }  from 'react';
 import {Controlled as ControlledEditor} from 'react-codemirror2' // for code editor
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
 import 'codemirror/mode/xml/xml' // for auto complete of html in editor
 import 'codemirror/mode/javascript/javascript' //for auto complete of js in editor
-import 'codemirror/mode/css/css'  //for auto complete css js in editor
+// import 'codemirror/mode/css/css'  //for auto complete css js in editor
+
+import '../App.css'
 
 // codemirror css
 
 
-const Editor = () =>{
+const Editor = ({heading,icon,color , value , onChange}) =>{
+
+    const [open,setopen] = useState(true);
+
+    const handleChange = (editor,data,value) =>{
+        onChange(value);
+
+    }
+
     return(
-       <Box>
+       <Container style={open ? null : {flexGrow: 0}}>
           <Header>
              <Heading>
-                <Box component="spam" style = {{background: 'red', height: 20, width: 20, display: 'flex',
-                placeContent: 'center', borderRadius: 5, marginRight: 5, paddingButtom: 2}}>
-                /</Box>
-                HTML
+                <Box component="spam" style = {{background: color, height: 20, width: 20, display: 'flex',
+                placeContent: 'center', borderRadius: 5, marginRight: 5, paddingButtom: 2 , color: '#000'}}>
+                {icon}</Box>
+                {heading}
              </Heading>
-             <CloseFullscreen />
+             <CloseFullscreen 
+             fontSize='small'
+             style={{alignSelf: 'center'}}
+             onClick = {() => setopen(prevState => !prevState)}/>
           </Header>
 
-          <ControlledEditor />
-       </Box>
+          <ControlledEditor 
+            className='controlled-editor'
+            value = {value}
+            onBeforeChange  = {handleChange}
+            options={{
+                theme: 'material',
+                lineNumbers: true
+            }}
+          />
+       </Container>
     )
 }
 
@@ -48,7 +72,7 @@ const Header = styled(Box)`
 const Heading = styled(Box)`
     background: #1d1e22;
     padding: 9px 12px;
-    display: flex
+    display: flex;
 `
 
 export default Editor
