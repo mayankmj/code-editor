@@ -2,7 +2,7 @@
 import {Box,styled} from '@mui/material'
 import { useState } from 'react';
 import CloseFullscreen from '@mui/icons-material/CloseFullscreen'
-import React, { Component }  from 'react';
+import React from 'react';
 import {Controlled as ControlledEditor} from 'react-codemirror2' // for code editor
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
@@ -44,8 +44,11 @@ const Editor = ({heading,icon,color , value , onChange}) =>{
             value = {value}
             onBeforeChange  = {handleChange}
             options={{
-                theme: 'material',
-                lineNumbers: true
+                lineWrapping: true,
+                    lint: true,
+                    // mode: language,
+                    lineNumbers: true,
+                    theme: 'material'
             }}
           />
        </Container>
@@ -60,6 +63,7 @@ const Container = styled(Box)`
     display: flex;
     flex-direction: column;
     padding: 0 8px 8px;
+    ${'' /* position: relative; */}
 `
 
 const Header = styled(Box)`

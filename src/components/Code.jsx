@@ -43,4 +43,4 @@ const Container = styled(Box)`
     height: 50vh;
     display: flex;
 `
-export default Code;
+export default Code;  
