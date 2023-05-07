@@ -1,5 +1,5 @@
-# deploy link  
- https://frabjous-bunny-299c3d.netlify.app/
+# link  
+ https://code-edtiorr.netlify.app/
  
 # Features
 ## .Realtime code compiler for Html,CSS,javascript
